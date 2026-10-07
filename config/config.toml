@@ -16,6 +16,7 @@ CLOUDSDK_PYTHON = { value = "{% if tools.python is defined %}{{ tools.python.pat
 # Supporting runtimes for the npm-backed tools and Google Cloud CLI.
 node = "26"
 python = ["3.14", "3.12"]
+gh = "latest"
 
 # Native/core mise tools.
 go = "1.27"
