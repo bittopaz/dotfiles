@@ -14,8 +14,13 @@ alias l='ls -lah'
 alias ll='ls -lh'
 alias la='ls -lAh'
 
-# Optional work configuration: environment, aliases, and shell functions.
-[[ -f "$HOME/.bash_booking" ]] && source "$HOME/.bash_booking"
+# Optional snippets, loaded in filename order. Keep them safe to source twice
+# (interactive login shells read both startup files); guard interactive-only code.
+for bash_config in "$HOME/.config/bash/conf.d/"*.sh; do
+  # shellcheck disable=SC1090
+  [[ -f "$bash_config" ]] && source "$bash_config"
+done
+unset bash_config
 
 ## Better History
 # Enable partial history search with up/down arrows.

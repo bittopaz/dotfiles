@@ -77,8 +77,13 @@ export LUMEN_AUTO_REVIEW=0
 # Configure 4 spaces when using xmllint
 export XMLLINT_INDENT="    "
 
-# Optional work configuration (also loaded by interactive non-login shells).
-[[ -f "$HOME/.bash_booking" ]] && source "$HOME/.bash_booking"
+# Optional snippets, loaded in filename order. Keep them safe to source twice
+# (interactive login shells read both startup files); guard interactive-only code.
+for bash_config in "$HOME/.config/bash/conf.d/"*.sh; do
+  # shellcheck disable=SC1090
+  [[ -f "$bash_config" ]] && source "$bash_config"
+done
+unset bash_config
 
 # Private secrets. Keep this file chmod 600.
 [[ -f "$HOME/.bash_secrets" ]] && source "$HOME/.bash_secrets"
