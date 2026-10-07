@@ -15,10 +15,6 @@ url = "https://github.com/bittopaz/dotfiles.git"
 branch = "main"
 
 [env]
-# Prefer mise Python; allow fresh-machine setup before Python is installed.
-# tools.python is an object with one installed version, an array with multiple.
-CLOUDSDK_PYTHON = { value = "{% if tools.python is defined %}{{ tools.python.path if tools.python is map else tools.python[0].path }}/bin/python3{% else %}python3{% endif %}", tools = true }
-
 [tools]
 # Supporting runtimes for the npm-backed tools and Google Cloud CLI.
 node = "26"
