@@ -1,6 +1,9 @@
 [settings]
 auto_update = true
 
+[settings.history]
+sync = "sync"
+
 [settings.github]
 credential_command = 'gh auth token --hostname "$MISE_CREDENTIAL_HOST"'
 
