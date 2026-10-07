@@ -106,8 +106,3 @@ esac
 # Google Workspace CLI credentials
 # Let gws use credentials saved by `gws auth login`, not a stale exported file.
 
-# >>> fabric >>>
-# Managed by Fabric (v1). Edits inside this block may be overwritten.
-# Remove with `fabric path disable`, or just delete this block.
-[ -x "$HOME/.fabric/bin/fabric" ] && export PATH="$HOME/.fabric/bin:$PATH"
-# <<< fabric <<<
