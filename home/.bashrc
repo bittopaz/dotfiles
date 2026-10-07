@@ -13,18 +13,9 @@ alias lsa='ls -lah'
 alias l='ls -lah'
 alias ll='ls -lh'
 alias la='ls -lAh'
-alias bssh='ssh ssh.booking.com'
 
-# Run `bk auth:login`
-bklogin() {
-  BK_AUTH_SSO_TIMEOUT=600000 BK_DISABLE_EVENTS=1 bk auth:login --skip-okta-auth "$@" || return
-
-  # Import the refresh token that bk auth:login just wrote to ~/.bkcloud/auth.yaml.
-  # BK_TOKEN_NO_LOGIN prevents the cache helper from starting a second browser
-  # auth flow if the import unexpectedly fails.
-  BK_TOKEN_FORCE_REFRESH=1 BK_TOKEN_NO_LOGIN=1 "$HOME/.pi/agent/scripts/bk-token" >/dev/null || return
-  printf 'pi bk token cache refreshed\n'
-}
+# Optional work configuration: environment, aliases, and shell functions.
+[[ -f "$HOME/.bash_booking" ]] && source "$HOME/.bash_booking"
 
 ## Better History
 # Enable partial history search with up/down arrows.
@@ -63,31 +54,9 @@ unset_proxy() {
   unset no_proxy
 }
 
-# sudo() {
-#   if [[ $(/usr/sbin/dseditgroup -q -o checkmember -m "$(/usr/bin/stat -f%Su /dev/console)" admin) =~ ^no.+$ ]]; then
-#     /Applications/Privileges.app/Contents/Resources/PrivilegesCLI --add &&
-#     /usr/bin/sudo "${@}"
-#   else
-#     /usr/bin/sudo "${@}"
-#   fi
-# }
-
 mygit() {
   git config user.email bittopaz@gmail.com
   git config commit.gpgsign false
-}
-
-# Claude Code shortcuts
-cc-in-tooling() {
-  cd ~/Developer/gitlab.com/booking-com/mpsre/tooling && claude "$@"
-}
-
-cc-in-notes() {
-  cd ~/Developer/gitlab.com/booking-com/personal/xiaoyu.zhong/notes/ && claude "$@"
-}
-
-pi-in-notes() {
-  cd ~/Developer/gitlab.com/booking-com/personal/xiaoyu.zhong/notes/ && pi "$@"
 }
 
 # mise, https://mise.jdx.dev
@@ -131,9 +100,6 @@ __bash_add_prompt_command() {
 
 __bash_add_prompt_command __bash_history_sync
 unset -f __bash_add_prompt_command
-
-# bpages CLI
-export PATH="$HOME/.bpages/bin:$PATH"
 
 # Launch Codex with the preferred model and reasoning effort.
 cx() {

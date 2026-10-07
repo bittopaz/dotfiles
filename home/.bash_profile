@@ -59,7 +59,6 @@ path_prepend "/opt/bin"
 path_prepend "$HOME/.local/bin"
 
 # Golang
-export GONOSUMDB=gitlab.booking.com,gitlab.com/booking-com
 export GOPATH="$HOME/go"
 path_append "$GOPATH/bin"
 
@@ -78,6 +77,9 @@ export LUMEN_AUTO_REVIEW=0
 # Configure 4 spaces when using xmllint
 export XMLLINT_INDENT="    "
 
+# Optional work configuration (also loaded by interactive non-login shells).
+[[ -f "$HOME/.bash_booking" ]] && source "$HOME/.bash_booking"
+
 # Private secrets. Keep this file chmod 600.
 [[ -f "$HOME/.bash_secrets" ]] && source "$HOME/.bash_secrets"
 
@@ -95,9 +97,6 @@ unset -f path_remove path_prepend path_append
 case $- in
   *i*) [[ -f "$HOME/.bashrc" ]] && source "$HOME/.bashrc" ;;
 esac
-
-# bpages CLI
-export PATH="$HOME/.bpages/bin:$PATH"
 
 # Google Workspace CLI credentials
 # Let gws use credentials saved by `gws auth login`, not a stale exported file.
