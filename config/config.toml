@@ -77,7 +77,6 @@ rust = "1"
 
 # GUI/font casks that the built-in mise Homebrew manager supports.
 "brew-cask:font-dejavu" = "latest"
-"brew-cask:ghostty" = "latest"
 
 [bootstrap.services.mise-history]
 builtin = "history-watch"
