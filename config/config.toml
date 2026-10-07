@@ -1,0 +1,186 @@
+[settings]
+auto_update = true
+
+[settings.github]
+credential_command = 'gh auth token --hostname "$MISE_CREDENTIAL_HOST"'
+
+[settings.gitlab]
+glab_cli_tokens = false
+
+[settings.dotfiles]
+root = "~/Developer/gitlab.com/booking-com/personal/xiaoyu.zhong/dotfiles/home"
+
+[env]
+# Keep gcloud on the configured mise Python without hard-coding a home directory or version.
+CLOUDSDK_PYTHON = { value = "{{ tools.python[0].path }}/bin/python3", tools = true }
+
+[tools]
+# Supporting runtimes for the npm-backed tools and Google Cloud CLI.
+node = "26"
+python = ["3.14", "3.12"]
+
+# Native/core mise tools.
+go = "1.27"
+ruby = "4"
+rust = "1"
+"aqua:bazelbuild/bazelisk" = "1.29.0"
+"aqua:Kitware/CMake" = "4.4.3"
+"aqua:direnv/direnv" = "latest"
+"aqua:fastfetch-cli/fastfetch" = "latest"
+"aqua:sharkdp/fd" = "latest"
+"aqua:junegunn/fzf" = "latest"
+"github:grafana/gcx" = "latest"
+"aqua:cli/cli" = "latest"
+"gitlab:gitlab-org/cli" = "latest"
+"github:googleworkspace/cli" = "latest"
+# Track official Pi releases immediately while the npm mirror lags upstream.
+"github:earendil-works/pi" = { version = "latest", minimum_release_age = "0s" }
+"go:golang.org/x/tools/gopls" = "latest"
+"aqua:charmbracelet/gum" = "2.0.1"
+"aqua:modem-dev/hunk" = "latest"
+"aqua:jqlang/jq" = "latest"
+"aqua:casey/just" = "latest"
+"github:jgm/pandoc" = "latest"
+"aqua:BurntSushi/ripgrep" = "latest"
+"aqua:koalaman/shellcheck" = "latest"
+"aqua:sqlc-dev/sqlc" = "1.31"
+"aqua:starship/starship" = "latest"
+"aqua:hashicorp/terraform-ls" = "latest"
+"aqua:tmux/tmux-builds" = "3.7c"
+
+# npm tools.
+"npm:bash-language-server" = "latest"
+"npm:dockerfile-language-server-nodejs" = "latest"
+"npm:js-beautify" = "latest"
+"npm:prettier" = "latest"
+"npm:stylelint" = "latest"
+# typescript-language-server requires the JS tsserver, which TypeScript 7 no longer ships.
+"npm:typescript" = "6"
+"npm:typescript-language-server" = "latest"
+"npm:vscode-langservers-extracted" = "4.10.0"
+"npm:yaml-language-server" = "latest"
+
+# CLI casks moved to native mise backends.
+"aqua:anthropics/claude-code" = "latest"
+"aqua:openai/codex" = "latest"
+# Install gcloud after Python so CLOUDSDK_PYTHON resolves during the vfox install hooks.
+"vfox:mise-plugins/vfox-gcloud" = { version = "latest", depends = ["python"] }
+terraform = "latest"
+# Podman's macOS archive omits the VM helper binaries.
+podman = { version = "latest", rename_exe = "podman-remote", depends = ["github:containers/gvisor-tap-vsock", "github:crc-org/vfkit"] }
+"github:containers/gvisor-tap-vsock" = "0.8.9"
+"github:crc-org/vfkit" = "0.6.4"
+uv = "latest"
+"pipx:browser-use" = { version = "latest", uvx_args = "--python 3.12 --upgrade --force", depends = ["python", "uv"] }
+kubectl = "1.35"
+helm = "3.22"
+
+[bootstrap.packages]
+# Host libraries, compilers, GNU utilities, and host-integrated programs.
+"brew:bash" = "latest"
+"brew:btop" = "latest"
+"brew:coreutils" = "latest"
+"brew:fontconfig" = "latest"
+"brew:gcc" = "latest"
+"brew:git" = "latest"
+"brew:gmp" = "latest"
+"brew:gnu-sed" = "latest"
+"brew:gnupg" = "latest"
+"brew:grep" = "latest"
+"brew:ispell" = "latest"
+"brew:libtool" = "latest"
+"brew:libyaml" = "latest"
+"brew:mtr" = "latest"
+"brew:openssl@3" = "latest"
+"brew:pkgconf" = "latest"
+"brew:sqlite" = "latest"
+"brew:sqlfmt" = "latest"
+"brew:the_silver_searcher" = "latest"
+"brew:vim" = "latest"
+"brew:watch" = "latest"
+
+# GUI/font casks that the built-in mise Homebrew manager supports.
+"brew-cask:font-dejavu" = "latest"
+"brew-cask:ghostty" = "latest"
+
+[bootstrap.mise_shell_activate]
+bash = true
+zsh = true
+
+[bootstrap.macos.dock]
+autohide = true
+
+[bootstrap.macos.finder]
+preferred_view_style = "list"
+
+[dotfiles]
+"~/.agents/.skill-lock.json" = { mode = "symlink" }
+"~/.claude/CLAUDE.md" = { mode = "symlink" }
+"~/.claude/commands" = { mode = "symlink" }
+"~/.claude/memory" = { mode = "symlink" }
+
+# Ghostty settings from settings.dotfiles.root.
+"~/.config/ghostty/config" = { mode = "symlink" }
+# --from-dir in README keeps this path stable when bootstrapping a new workstation.
+"~/.config/mise/config.toml" = { source = "~/Developer/gitlab.com/booking-com/personal/xiaoyu.zhong/dotfiles/mise.toml", mode = "symlink" }
+
+# Whole files/directories from settings.dotfiles.root, never entire agent roots.
+"~/.pi/agent/AGENTS.md" = { mode = "symlink" }
+"~/.pi/agent/extensions" = { mode = "symlink" }
+"~/.pi/agent/keybindings.json" = { mode = "symlink" }
+"~/.pi/agent/mcp.json" = { mode = "symlink" }
+"~/.pi/agent/memory" = { mode = "symlink" }
+"~/.pi/agent/models.json" = { mode = "symlink" }
+"~/.pi/agent/prompts" = { mode = "symlink" }
+"~/.pi/agent/scripts" = { mode = "symlink" }
+"~/.pi/agent/settings.json" = { mode = "symlink" }
+"~/.pi/agent/themes" = { mode = "symlink" }
+"~/Developer/gitlab.com/booking-com/mise.toml" = { mode = "track" }
+
+[bootstrap.hooks.post-dotfiles]
+# A lockfile symlink cannot be a [dotfiles] source because mise would try to parse it as config.
+run = '''
+config="$HOME/.config/mise/config.toml"
+config_source="$(readlink "$config")"
+[ -n "$config_source" ] || {
+  echo "expected $config to be a symlink" >&2
+  exit 1
+}
+source="$(dirname "$config_source")/mise.lock"
+target="$HOME/.config/mise/mise.lock"
+mkdir -p "$(dirname "$target")"
+if [ -L "$target" ]; then
+  [ "$(readlink "$target")" = "$source" ] || {
+    echo "refusing to replace unexpected lockfile symlink: $target" >&2
+    exit 1
+  }
+elif [ -e "$target" ]; then
+  cmp -s "$source" "$target" || {
+    echo "refusing to replace a lockfile that differs from $source" >&2
+    exit 1
+  }
+  rm "$target"
+  ln -s "$source" "$target"
+else
+  ln -s "$source" "$target"
+fi
+'''
+
+[tasks.bootstrap]
+description = "Ensure GitHub CLI authentication is available after tools are installed"
+run = "gh auth status >/dev/null 2>&1 || gh auth login"
+
+[tasks.agents-apply]
+description = "Apply managed agent configuration (stop on conflicts)"
+dir = "~/Developer/gitlab.com/booking-com/personal/xiaoyu.zhong/dotfiles"
+run = "bash scripts/agents-apply.sh"
+
+[tasks.agents-deps]
+description = "Install locked Pi extension dependencies"
+dir = "~/Developer/gitlab.com/booking-com/personal/xiaoyu.zhong/dotfiles"
+run = "bash scripts/agents-deps.sh"
+
+[tasks.agents-setup]
+description = "Apply managed agent configuration, then install extension dependencies"
+dir = "~/Developer/gitlab.com/booking-com/personal/xiaoyu.zhong/dotfiles"
+run = [{ task = "agents-apply" }, { task = "agents-deps" }]
