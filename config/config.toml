@@ -7,9 +7,6 @@ credential_command = 'gh auth token --hostname "$MISE_CREDENTIAL_HOST"'
 [settings.gitlab]
 glab_cli_tokens = false
 
-[settings.dotfiles]
-root = "~/Developer/gitlab.com/booking-com/personal/xiaoyu.zhong/dotfiles/home"
-
 [env]
 # Keep gcloud on the configured mise Python without hard-coding a home directory or version.
 CLOUDSDK_PYTHON = { value = "{{ tools.python[0].path }}/bin/python3", tools = true }
