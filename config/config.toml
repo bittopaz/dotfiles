@@ -26,22 +26,6 @@ rust = "1"
 "aqua:sharkdp/fd" = "latest"
 "aqua:junegunn/fzf" = "latest"
 "aqua:cli/cli" = "latest"
-"github:googleworkspace/cli" = "latest"
-# Track official Pi releases immediately while the npm mirror lags upstream.
-"github:earendil-works/pi" = { version = "latest", minimum_release_age = "0s" }
-"go:golang.org/x/tools/gopls" = "latest"
-"aqua:charmbracelet/gum" = "2.0.1"
-"aqua:modem-dev/hunk" = "latest"
-"aqua:jqlang/jq" = "latest"
-"aqua:casey/just" = "latest"
-"github:jgm/pandoc" = "latest"
-"aqua:BurntSushi/ripgrep" = "latest"
-"aqua:koalaman/shellcheck" = "latest"
-"aqua:sqlc-dev/sqlc" = "1.31"
-"aqua:starship/starship" = "latest"
-"aqua:hashicorp/terraform-ls" = "latest"
-"aqua:tmux/tmux-builds" = "3.7c"
-
 # npm tools.
 "npm:bash-language-server" = "latest"
 "npm:dockerfile-language-server-nodejs" = "latest"
