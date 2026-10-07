@@ -13,7 +13,6 @@ glab_cli_tokens = false
 [tools]
 # Supporting runtimes for the npm-backed tools and Google Cloud CLI.
 node = "26"
-python = ["3.14", "3.12"]
 gh = "latest"
 
 # Native/core mise tools.
