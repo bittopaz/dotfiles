@@ -136,7 +136,6 @@ preferred_view_style = "list"
 "~/.pi/agent/scripts" = { mode = "symlink" }
 "~/.pi/agent/settings.json" = { mode = "symlink" }
 "~/.pi/agent/themes" = { mode = "symlink" }
-"~/Developer/gitlab.com/booking-com/mise.toml" = { mode = "track" }
 
 [tasks.bootstrap]
 description = "Ensure GitHub CLI authentication is available after tools are installed"

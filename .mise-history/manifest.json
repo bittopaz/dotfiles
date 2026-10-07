@@ -24,12 +24,6 @@
       "autosave": true,
       "encrypt": false,
       "variants": []
-    },
-    {
-      "path": "home/Developer/gitlab.com/booking-com/mise.toml",
-      "autosave": true,
-      "encrypt": false,
-      "variants": []
     }
   ],
   "exclude": [],
