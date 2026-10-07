@@ -114,25 +114,7 @@ autohide = true
 preferred_view_style = "list"
 
 [dotfiles]
-"~/.agents/.skill-lock.json" = { mode = "symlink" }
-"~/.claude/CLAUDE.md" = { mode = "symlink" }
-"~/.claude/commands" = { mode = "symlink" }
-"~/.claude/memory" = { mode = "symlink" }
-
-# Ghostty settings from settings.dotfiles.root.
 "~/.config/ghostty/config" = { mode = "track" }
-
-# Whole files/directories from settings.dotfiles.root, never entire agent roots.
-"~/.pi/agent/AGENTS.md" = { mode = "track" }
-"~/.pi/agent/extensions" = { mode = "symlink" }
-"~/.pi/agent/keybindings.json" = { mode = "track" }
-"~/.pi/agent/mcp.json" = { mode = "symlink" }
-"~/.pi/agent/memory" = { mode = "symlink" }
-"~/.pi/agent/models.json" = { mode = "symlink" }
-"~/.pi/agent/prompts" = { mode = "symlink" }
-"~/.pi/agent/scripts" = { mode = "symlink" }
-"~/.pi/agent/settings.json" = { mode = "symlink" }
-"~/.pi/agent/themes" = { mode = "symlink" }
 
 [tasks.bootstrap]
 description = "Ensure GitHub CLI authentication is available after tools are installed"
