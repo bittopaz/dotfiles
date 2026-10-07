@@ -60,7 +60,6 @@ path_prepend "$HOME/.local/bin"
 
 # Golang
 export GONOSUMDB=gitlab.booking.com,gitlab.com/booking-com
-export GOPROXY=https://jfrog.booking.com/artifactory/api/go/golang
 export GOPATH="$HOME/go"
 path_append "$GOPATH/bin"
 
