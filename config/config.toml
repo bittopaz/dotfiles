@@ -26,6 +26,19 @@ rust = "1"
 "aqua:sharkdp/fd" = "latest"
 "aqua:junegunn/fzf" = "latest"
 "aqua:cli/cli" = "latest"
+# Track official Pi releases immediately while the npm mirror lags upstream.
+"github:earendil-works/pi" = { version = "latest", minimum_release_age = "0s" }
+"go:golang.org/x/tools/gopls" = "latest"
+"aqua:charmbracelet/gum" = "2.0.1"
+"aqua:modem-dev/hunk" = "latest"
+"aqua:jqlang/jq" = "latest"
+"github:jgm/pandoc" = "latest"
+"aqua:BurntSushi/ripgrep" = "latest"
+"aqua:koalaman/shellcheck" = "latest"
+"aqua:starship/starship" = "latest"
+"aqua:hashicorp/terraform-ls" = "latest"
+"aqua:tmux/tmux-builds" = "3.7c"
+
 # npm tools.
 "npm:bash-language-server" = "latest"
 "npm:dockerfile-language-server-nodejs" = "latest"
@@ -37,21 +50,6 @@ rust = "1"
 "npm:typescript-language-server" = "latest"
 "npm:vscode-langservers-extracted" = "4.10.0"
 "npm:yaml-language-server" = "latest"
-
-# CLI casks moved to native mise backends.
-"aqua:anthropics/claude-code" = "latest"
-"aqua:openai/codex" = "latest"
-# Install gcloud after Python so CLOUDSDK_PYTHON resolves during the vfox install hooks.
-"vfox:mise-plugins/vfox-gcloud" = { version = "latest", depends = ["python"] }
-terraform = "latest"
-# Podman's macOS archive omits the VM helper binaries.
-podman = { version = "latest", rename_exe = "podman-remote", depends = ["github:containers/gvisor-tap-vsock", "github:crc-org/vfkit"] }
-"github:containers/gvisor-tap-vsock" = "0.8.9"
-"github:crc-org/vfkit" = "0.6.4"
-uv = "latest"
-"pipx:browser-use" = { version = "latest", uvx_args = "--python 3.12 --upgrade --force", depends = ["python", "uv"] }
-kubectl = "1.35"
-helm = "3.22"
 
 [bootstrap.packages]
 # Host libraries, compilers, GNU utilities, and host-integrated programs.
