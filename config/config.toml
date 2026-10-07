@@ -26,7 +26,6 @@ rust = "1"
 "aqua:sharkdp/fd" = "latest"
 "aqua:junegunn/fzf" = "latest"
 "aqua:cli/cli" = "latest"
-"gitlab:gitlab-org/cli" = "latest"
 "github:googleworkspace/cli" = "latest"
 # Track official Pi releases immediately while the npm mirror lags upstream.
 "github:earendil-works/pi" = { version = "latest", minimum_release_age = "0s" }
