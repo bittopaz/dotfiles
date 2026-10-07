@@ -114,6 +114,8 @@ autohide = true
 preferred_view_style = "list"
 
 [dotfiles]
+"~/.bash_profile" = { mode = "track" }
+"~/.bashrc" = { mode = "track" }
 "~/.config/ghostty/config" = { mode = "track" }
 
 [tasks.bootstrap]
