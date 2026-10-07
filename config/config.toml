@@ -14,7 +14,6 @@ glab_cli_tokens = false
 url = "https://github.com/bittopaz/dotfiles.git"
 branch = "main"
 
-[env]
 [tools]
 # Supporting runtimes for the npm-backed tools and Google Cloud CLI.
 node = "26"
