@@ -10,10 +10,6 @@ credential_command = 'gh auth token --hostname "$MISE_CREDENTIAL_HOST"'
 [settings.gitlab]
 glab_cli_tokens = false
 
-[history.origin]
-url = "https://github.com/bittopaz/dotfiles.git"
-branch = "main"
-
 [tools]
 # Supporting runtimes for the npm-backed tools and Google Cloud CLI.
 node = "26"
