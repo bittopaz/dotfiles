@@ -118,6 +118,7 @@ preferred_view_style = "list"
 "~/.bashrc" = { mode = "track" }
 "~/.config/ghostty/config" = { mode = "track" }
 "~/.config/mise/config.toml" = { mode = "track" }
+"~/.config/starship.toml" = { mode = "track" }
 "~/.vimrc" = { mode = "track" }
 
 [tasks.bootstrap]

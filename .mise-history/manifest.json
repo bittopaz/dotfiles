@@ -26,6 +26,12 @@
       "variants": []
     },
     {
+      "path": "home/.config/starship.toml",
+      "autosave": true,
+      "encrypt": false,
+      "variants": []
+    },
+    {
       "path": "home/.vimrc",
       "autosave": true,
       "encrypt": false,
