@@ -1,0 +1,17 @@
+font-family = "MesloLGL Nerd Font Mono"
+font-size = 18
+theme = "Solarized Dark Higher Contrast"
+window-height = 35
+window-width = 150
+command = /opt/homebrew/bin/bash
+
+clipboard-trim-trailing-spaces = true
+
+## Split
+keybind = cmd+g>h=goto_split:left
+keybind = cmd+g>j=goto_split:bottom
+keybind = cmd+g>k=goto_split:top
+keybind = cmd+g>l=goto_split:right
+window-save-state = always
+
+macos-option-as-alt = true

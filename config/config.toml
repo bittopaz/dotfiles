@@ -103,6 +103,9 @@ helm = "3.22"
 "brew-cask:font-dejavu" = "latest"
 "brew-cask:ghostty" = "latest"
 
+[bootstrap.services.mise-history]
+builtin = "history-watch"
+
 [bootstrap.mise_shell_activate]
 bash = true
 zsh = true
@@ -120,14 +123,12 @@ preferred_view_style = "list"
 "~/.claude/memory" = { mode = "symlink" }
 
 # Ghostty settings from settings.dotfiles.root.
-"~/.config/ghostty/config" = { mode = "symlink" }
-# --from-dir in README keeps this path stable when bootstrapping a new workstation.
-"~/.config/mise/config.toml" = { source = "~/Developer/gitlab.com/booking-com/personal/xiaoyu.zhong/dotfiles/mise.toml", mode = "symlink" }
+"~/.config/ghostty/config" = { mode = "track" }
 
 # Whole files/directories from settings.dotfiles.root, never entire agent roots.
-"~/.pi/agent/AGENTS.md" = { mode = "symlink" }
+"~/.pi/agent/AGENTS.md" = { mode = "track" }
 "~/.pi/agent/extensions" = { mode = "symlink" }
-"~/.pi/agent/keybindings.json" = { mode = "symlink" }
+"~/.pi/agent/keybindings.json" = { mode = "track" }
 "~/.pi/agent/mcp.json" = { mode = "symlink" }
 "~/.pi/agent/memory" = { mode = "symlink" }
 "~/.pi/agent/models.json" = { mode = "symlink" }
@@ -137,50 +138,6 @@ preferred_view_style = "list"
 "~/.pi/agent/themes" = { mode = "symlink" }
 "~/Developer/gitlab.com/booking-com/mise.toml" = { mode = "track" }
 
-[bootstrap.hooks.post-dotfiles]
-# A lockfile symlink cannot be a [dotfiles] source because mise would try to parse it as config.
-run = '''
-config="$HOME/.config/mise/config.toml"
-config_source="$(readlink "$config")"
-[ -n "$config_source" ] || {
-  echo "expected $config to be a symlink" >&2
-  exit 1
-}
-source="$(dirname "$config_source")/mise.lock"
-target="$HOME/.config/mise/mise.lock"
-mkdir -p "$(dirname "$target")"
-if [ -L "$target" ]; then
-  [ "$(readlink "$target")" = "$source" ] || {
-    echo "refusing to replace unexpected lockfile symlink: $target" >&2
-    exit 1
-  }
-elif [ -e "$target" ]; then
-  cmp -s "$source" "$target" || {
-    echo "refusing to replace a lockfile that differs from $source" >&2
-    exit 1
-  }
-  rm "$target"
-  ln -s "$source" "$target"
-else
-  ln -s "$source" "$target"
-fi
-'''
-
 [tasks.bootstrap]
 description = "Ensure GitHub CLI authentication is available after tools are installed"
 run = "gh auth status >/dev/null 2>&1 || gh auth login"
-
-[tasks.agents-apply]
-description = "Apply managed agent configuration (stop on conflicts)"
-dir = "~/Developer/gitlab.com/booking-com/personal/xiaoyu.zhong/dotfiles"
-run = "bash scripts/agents-apply.sh"
-
-[tasks.agents-deps]
-description = "Install locked Pi extension dependencies"
-dir = "~/Developer/gitlab.com/booking-com/personal/xiaoyu.zhong/dotfiles"
-run = "bash scripts/agents-deps.sh"
-
-[tasks.agents-setup]
-description = "Apply managed agent configuration, then install extension dependencies"
-dir = "~/Developer/gitlab.com/booking-com/personal/xiaoyu.zhong/dotfiles"
-run = [{ task = "agents-apply" }, { task = "agents-deps" }]

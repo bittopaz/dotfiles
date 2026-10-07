@@ -8,6 +8,24 @@
       "variants": []
     },
     {
+      "path": "home/.config/ghostty/config",
+      "autosave": true,
+      "encrypt": false,
+      "variants": []
+    },
+    {
+      "path": "home/.pi/agent/AGENTS.md",
+      "autosave": true,
+      "encrypt": false,
+      "variants": []
+    },
+    {
+      "path": "home/.pi/agent/keybindings.json",
+      "autosave": true,
+      "encrypt": false,
+      "variants": []
+    },
+    {
       "path": "home/Developer/gitlab.com/booking-com/mise.toml",
       "autosave": true,
       "encrypt": false,
