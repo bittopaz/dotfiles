@@ -11,6 +11,9 @@ credential_command = 'gh auth token --hostname "$MISE_CREDENTIAL_HOST"'
 [settings.gitlab]
 glab_cli_tokens = false
 
+[settings.self_update]
+minimum_release_age = "0s"
+
 [tools]
 # Supporting runtimes for the npm-backed tools and Google Cloud CLI.
 node = "26"
