@@ -1,6 +1,7 @@
 [settings]
 auto_update = true
 tool_update.global_auto = "24h"
+
 [settings.self_update]
 minimum_release_age = "0s"
 
