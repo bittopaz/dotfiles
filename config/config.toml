@@ -1,6 +1,6 @@
 [settings]
 auto_update = true
-tool_update.global_auto = "24h"
+#tool_update.global_auto = "24h"
 
 [settings.history]
 sync = "sync"
