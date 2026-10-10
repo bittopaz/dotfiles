@@ -1,6 +1,8 @@
 [settings]
 auto_update = true
-#tool_update.global_auto = "24h"
+tool_update.global_auto = "24h"
+[settings.self_update]
+minimum_release_age = "0s"
 
 [settings.history]
 sync = "sync"
@@ -10,9 +12,6 @@ credential_command = 'gh auth token --hostname "$MISE_CREDENTIAL_HOST"'
 
 [settings.gitlab]
 glab_cli_tokens = false
-
-[settings.self_update]
-minimum_release_age = "0s"
 
 [tools]
 # Supporting runtimes for the npm-backed tools and Google Cloud CLI.
